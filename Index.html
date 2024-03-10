@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/Images/icon.png">
+    <link rel="stylesheet" href="Style.css">
+    <title>Quote Generator</title>
+</head>
+
+<body>
+
+    <div class="qoute-box">
+        <h2>Quote of the day</h2>
+        <blockquote id="quote">Loading...</blockquote>
+        <span id="author">Loading....</span>
+        <div>
+            <button onclick="tweet()"> <img src="/Images/twitter.png">Tweet</button>
+            <button onclick="getquote(api_url)">New Quote</button>
+            <button onclick="thread()"> <img src="/Images/threads.png">Threads</button>
+        </div>
+        <div class="social">
+            <h4> <a href="https://www.linkedin.com/in/saad-sultan-aa4925219/">linkedIn Profile</a></h4>
+            <h4> <a href="https://github.com/saadsultan482">GitHUB Profile</a></h4>
+        </div>
+
+    </div>
+
+    <script>
+
+        const quote = document.getElementById('quote');
+        const author = document.getElementById('author');
+
+
+        const api_url = "https://api.quotable.io/random";
+
+        async function getquote(url) {
+            const response = await fetch(url);
+            var data = await response.json();
+            // console.log(data);
+            quote.innerHTML = data.content;
+            author.innerHTML = data.author;
+        }
+
+        getquote(api_url);
+
+        function tweet() {
+            window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML + " by-- " + author.innerHTML, "Tweet Widow", "width = 600, height= 400");
+
+        }
+
+        function thread() {
+            window.open("https://threads.net/intent/post?text=" + quote.innerHTML + " by-- " + author.innerHTML, "Tweet Widow", "width = 600, height= 400");
+        }
+
+    </script>
+
+</body>
+
+</html>
